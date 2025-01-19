@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# checking that the user has provided input
+if [ -z "$1" ]; then
+    echo "Error: No input provided. Please enter a 4-digit integer."
+    exit 1
+fi
+
+# Checking that the input is a number and has exactly 4 digits
+if ! [[ "$1" =~ ^[0-9]{4}$ ]]; then
+    echo "Error: Invalid input. Please enter a valid 4-digit integer."
+    exit 1
+fi
+
+# hashing with SHA-256
+hash=$(echo -n "$1" | sha256sum | awk '{print $1}')
+echo "Input: $1"
+echo "Hash: $hash"
+
